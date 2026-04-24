@@ -4,7 +4,9 @@ import { CreateAuthDto } from './dto/create-auth.dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
 import type { Response, Request } from 'express';
+import { Public } from '../../common/decorators/public.decorator';
 
+@Public()
 @ApiTags('Auth (Xác thực)')
 @Controller('auth')
 export class AuthController {

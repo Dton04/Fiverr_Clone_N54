@@ -72,44 +72,4 @@ export class UploadController {
     };
   }
 
-  @ApiOperation({
-    summary: 'Upload hình ảnh cho công việc (cần đăng nhập)',
-    description: 'Upload ảnh minh hoạ cho Gig/Công Việc. Chỉ cho phép ảnh JPEG, PNG, WebP, tối đa 5MB.',
-  })
-  @ApiConsumes('multipart/form-data')
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        file: {
-          type: 'string',
-          format: 'binary',
-          description: 'File ảnh công việc',
-        },
-      },
-    },
-  })
-  @Post('job-image')
-  @UseInterceptors(FileInterceptor('file', multerOptions))
-  async uploadJobImage(
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
-          new FileTypeValidator({ fileType: /(jpeg|jpg|png|webp)$/ }),
-        ],
-      }),
-    )
-    file: Express.Multer.File,
-  ) {
-    const { url } = await this.cloudinaryService.uploadFile(
-      file,
-      'fiverr/jobs',
-    );
-
-    return {
-      message: 'Tải ảnh công việc thành công',
-      url,
-    };
-  }
 }

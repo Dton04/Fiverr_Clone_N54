@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service';
 import { CreateLoaiCongViecDto } from './dto/create-loai-cong-viec.dto';
 import { UpdateLoaiCongViecDto } from './dto/update-loai-cong-viec.dto';
 
 @Injectable()
 export class LoaiCongViecService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async findAll() {
     return this.prisma.loaiCongViec.findMany({
@@ -45,9 +45,15 @@ export class LoaiCongViecService {
   }
 
   async create(createLoaiCongViecDto: CreateLoaiCongViecDto) {
+    const loaicongviec = await this.prisma.loaiCongViec.findFirst({
+      where: { ten_loai_cong_viec: createLoaiCongViecDto.ten_loai_cong_viec },
+    });
+    if (loaicongviec) {
+      throw new BadRequestException('Loại công việc đã tồn tại');
+    }
     return this.prisma.loaiCongViec.create({
       data: { ten_loai_cong_viec: createLoaiCongViecDto.ten_loai_cong_viec },
-    });
+    })
   }
 
   async update(id: number, updateLoaiCongViecDto: UpdateLoaiCongViecDto) {

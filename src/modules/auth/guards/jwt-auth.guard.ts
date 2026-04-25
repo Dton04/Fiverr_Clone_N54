@@ -21,7 +21,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   }
 
   handleRequest(err: any, user: any, info: any) {
-    // Info contains the passport error, often an instance of Error
     if (info && info.name === 'TokenExpiredError') {
       throw new ForbiddenException('Token đã hết hạn');
     }
@@ -29,7 +28,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     if (err || !user) {
       throw err || new UnauthorizedException('Bạn cần đăng nhập để thực hiện chức năng này');
     }
-    
+
     return user;
   }
 }

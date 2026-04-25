@@ -10,12 +10,11 @@ import { Roles } from '../../common/decorators/roles.decorator';
 @ApiTags('LoaiCongViec (Loại công việc)')
 @Controller('loai-cong-viec')
 export class LoaiCongViecController {
-  constructor(private readonly loaiCongViecService: LoaiCongViecService) {}
+  constructor(private readonly loaiCongViecService: LoaiCongViecService) { }
 
   @ApiBearerAuth()
   @UseGuards(RolesGuard)
-  @Roles('ADMIN')
-  @ApiOperation({ summary: 'Tạo loại công việc mới (ADMIN)' })
+  @ApiOperation({ summary: 'Tạo loại công việc mới ' })
   @Post()
   create(@Body() createLoaiCongViecDto: CreateLoaiCongViecDto) {
     return this.loaiCongViecService.create(createLoaiCongViecDto);

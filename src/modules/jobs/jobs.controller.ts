@@ -24,14 +24,17 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { JobsService } from './jobs.service';
-import { CreateJobDto, UpdateJobDto, QueryJobDto } from './dto/job.dto';
+
 import { Public } from '../../common/decorators/public.decorator';
 import { multerOptions } from '../../common/cloudinary/multer.config';
+import { QueryJobDto } from './dto/query.job.dto';
+import { CreateJobDto } from './dto/create-job-dto';
+import { UpdateJobDto } from './dto/update-job-dto';
 
 @ApiTags('Jobs (Công việc)')
 @Controller('jobs')
 export class JobsController {
-  constructor(private readonly jobsService: JobsService) {}
+  constructor(private readonly jobsService: JobsService) { }
 
   @Public()
   @ApiOperation({

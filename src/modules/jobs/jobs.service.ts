@@ -4,8 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service';
-import { CreateJobDto, UpdateJobDto, QueryJobDto } from './dto/job.dto';
+
 import { CloudinaryService } from '../../common/cloudinary/cloudinary.service';
+import { QueryJobDto } from './dto/query.job.dto';
+import { CreateJobDto } from './dto/create-job-dto';
+import { UpdateJobDto } from './dto/update-job-dto';
 
 const JOB_SELECT = {
   id: true,
@@ -38,7 +41,7 @@ export class JobsService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly cloudinaryService: CloudinaryService,
-  ) {}
+  ) { }
 
   async findAll(query: QueryJobDto) {
     const page = Number(query.page) || 1;

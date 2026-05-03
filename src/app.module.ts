@@ -14,9 +14,11 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { ChiTietLoaiCongViecModule } from './modules/chi-tiet-loai-cong-viec/chi-tiet-loai-cong-viec.module';
 import { LoaiCongViecModule } from './modules/loai-cong-viec/loai-cong-viec.module';
+import { ThueCongViecModule } from './modules/thue-cong-viec/thue-cong-viec.module';
+import { BinhLuanModule } from './modules/binh-luan/binh-luan.module';
 
 @Module({
-  imports: [AuthModule, PrismaModule, UsersModule, UploadModule, JobsModule, ChiTietLoaiCongViecModule, LoaiCongViecModule],
+  imports: [AuthModule, PrismaModule, UsersModule, UploadModule, JobsModule, ChiTietLoaiCongViecModule, LoaiCongViecModule, ThueCongViecModule, BinhLuanModule],
   controllers: [AppController],
   providers: [AppService,
     { provide: APP_FILTER, useClass: HttpExceptionFilter },
